@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calculator</title>
+
+    <style>
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator {
+            background-color: white;
+            width: 100%;
+            max-width: 380px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 30px;
+        }
+
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #667eea;
+        }
+
+    
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 14px;
+            font-size: 22px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            background-color: #667eea;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #4b5fc4;
+            transform: translateY(-2px);
+        }
+
+        
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f0f3ff;
+            border-radius: 10px;
+            color: #333;
+            font-size: 20px;
+            overflow-wrap: anywhere;
+        }
+
+
+        @media (max-width: 400px) {
+            .calculator {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+
+        <h1>Calculator</h1>
+
+        <input type="number" id="num1"
+               placeholder="Enter first number">
+
+        <input type="number" id="num2"
+               placeholder="Enter second number">
+
+        <div class="buttons">
+            <button onclick="calculate('+')">+</button>
+            <button onclick="calculate('-')">−</button>
+            <button onclick="calculate('*')">×</button>
+            <button onclick="calculate('/')">÷</button>
+        </div>
+
+        <h2 id="result">Result: 0</h2>
+
+    </div>
+
+    <script>
+        function calculate(operator) {
+
+            let number1 = document.querySelector("#num1").value;
+            let number2 = document.querySelector("#num2").value;
+
+            
+            if (number1 === "" || number2 === "") {
+                document.querySelector("#result").innerHTML =
+                    "Please enter both numbers!";
+                return;
+            }
+
+            number1 = Number(number1);
+            number2 = Number(number2);
+
+            let result;
+
+            if (operator === '+') {
+                result = number1 + number2;
+            }
+            else if (operator === '-') {
+                result = number1 - number2;
+            }
+            else if (operator === '*') {
+                result = number1 * number2;
+            }
+            else if (operator === '/') {
+
+                if (number2 === 0) {
+                    document.querySelector("#result").innerHTML =
+                        "Cannot divide by zero!";
+                    return;
+                }
+
+                result = number1 / number2;
+            }
+
+            document.querySelector("#result").innerHTML =
+                "Result: " + result;
+        }
+    </script>
+
+</body>
+</html>
